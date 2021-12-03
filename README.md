@@ -1,2 +1,1 @@
-# SoftArchDesign-compat
-time kran bang
+lab07 - creational desgin patterns
