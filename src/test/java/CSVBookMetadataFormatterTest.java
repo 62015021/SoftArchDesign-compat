@@ -1,19 +1,17 @@
-
 import creational.BookMetadataFormatter;
 import creational.CSVBookMetadataFormatter;
 import creational.TestData;
+import org.junit.Before;
+import org.junit.Test;
+
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.jupiter.api.Assertions;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class CSVBookMetadataFormatterTest {
     private Path workingDir;
-
-    public CSVBookMetadataFormatterTest() {
-    }
 
     @Before
     public void init() {
@@ -27,7 +25,7 @@ public class CSVBookMetadataFormatterTest {
         BookMetadataFormatter bookMetadataFormatter = new CSVBookMetadataFormatter();
         bookMetadataFormatter.append(TestData.sailboatBook);
         String actual = bookMetadataFormatter.getMetadataString();
-        Assertions.assertEquals(expected.strip(), actual.strip());
+        assertEquals(expected.strip(), actual.strip());
     }
 
     @Test
@@ -37,7 +35,7 @@ public class CSVBookMetadataFormatterTest {
         BookMetadataFormatter bookMetadataFormatter = new CSVBookMetadataFormatter();
         bookMetadataFormatter.append(TestData.GoFBook);
         String actual = bookMetadataFormatter.getMetadataString();
-        Assertions.assertEquals(expected.strip(), actual.strip());
+        assertEquals(expected.strip(), actual.strip());
     }
 
     @Test
@@ -48,6 +46,6 @@ public class CSVBookMetadataFormatterTest {
         bookMetadataFormatter.append(TestData.dragonBook);
         bookMetadataFormatter.append(TestData.dinosaurBook);
         String actual = bookMetadataFormatter.getMetadataString();
-        Assertions.assertEquals(expected.strip(), actual.strip());
+        assertEquals(expected.strip(), actual.strip());
     }
 }

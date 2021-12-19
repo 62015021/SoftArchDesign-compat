@@ -5,60 +5,15 @@ import java.io.IOException;
 import java.io.PrintStream;
 
 public abstract class BookMetadataExporter extends BookCollection {
-    public abstract void export(PrintStream stream);
-    public abstract void add(Book b);
-}
 
-//XML
-class XMLBookMetadataExporter extends BookMetadataExporter {
-    BookMetadataFormatter bookMetadataFormatter = new XMLBookMetadataFormatter();
-
-    XMLBookMetadataExporter() throws ParserConfigurationException {
+    public String export() throws ParserConfigurationException, IOException {
+        BookMetadataFormatter formatter = createBookExport();
+        for(Book bookObj : books){
+            formatter.append(bookObj);
+        }
+        return formatter.getMetadataString();
     }
 
-    @Override
-    public void export(PrintStream stream) {
-        stream.println(bookMetadataFormatter.getMetadataString());
-    }
+    public abstract BookMetadataFormatter createBookExport() throws ParserConfigurationException, IOException;
 
-    @Override
-    public void add(Book b) {
-        bookMetadataFormatter.append(b);
-    }
-}
-
-//CSV
-class CSVBookMetadataExporter extends BookMetadataExporter {
-    BookMetadataFormatter bookMetadataFormatter = new CSVBookMetadataFormatter();
-
-    CSVBookMetadataExporter() throws IOException {
-    }
-
-    @Override
-    public void export(PrintStream stream) {
-        stream.println(bookMetadataFormatter.getMetadataString());
-    }
-
-    @Override
-    public void add(Book b) {
-        bookMetadataFormatter.append(b);
-    }
-}
-
-//JSON
-class JSONBookMetadataExporter extends BookMetadataExporter {
-    BookMetadataFormatter bookMetadataFormatter = new JSONBookMetadataFormatter();
-
-    JSONBookMetadataExporter() throws IOException {
-    }
-
-    @Override
-    public void export(PrintStream stream) {
-        stream.println(bookMetadataFormatter.getMetadataString());
-    }
-
-    @Override
-    public void add(Book b) {
-        bookMetadataFormatter.append(b);
-    }
 }
